@@ -7,7 +7,13 @@ const questions = [
     {
         type: 'input',
         name: 'logoName',
-        message: 'type 3 letters'
+        message: 'type 3 letters',
+        validate: function(userInput) {
+            if (userInput.length > 3) {
+                return "logo must be 3 characters"
+            }
+            return true
+        }
     },
     {
         type: 'input',
