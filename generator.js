@@ -1,5 +1,7 @@
 const fs = require('fs')
 const inquire = require('inquirer')
+const generateLogo = require('./generate-logo')
+
 
 const questions = [
     {
@@ -10,7 +12,7 @@ const questions = [
     {
         type: 'input',
         name: 'color',
-        message: 'endter color:'
+        message: 'enter color:'
     },
     {
         type: 'input',
@@ -28,9 +30,14 @@ const questions = [
 
 const init = async () => {
     try {
-        const answers = await inquire.createPromptModule(questions)
+        const answers = await inquire.prompt(questions)
         const logo = generateLogo(answers)
-        fs.writeFile('logo.svg', logo)
+        fs.writeFile('logo.svg', logo, (err) => {
+            if (err) {
+                throw err
+            }
+            console.log('logo generated :)')
+        })
     } catch (error) {
         console.error('error occurred', error)
     }
