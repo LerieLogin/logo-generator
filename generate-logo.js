@@ -1,31 +1,20 @@
-
+const Shape = require("./lib/shape");
 
 function generateLogo(answers) {
   console.log(answers);
 
-	let logoSVG
+  const shape = new Shape(answers.logoName, answers.color, answers.textColor);
 
-	if (answers.shape === 'circle') {
-		logoSVG = createCircleSVG(
-			answers.logoName,
-			answers.color,
-			answers.textColor
-		);
+  let logoSVG;
 
-	} else if ( answers.shape === 'square') {
-		logoSVG = createSquareSVG(
-			answers.logoName,
-			answers.color,
-			answers.textColor
-		);
-	} else {
-		logoSVG = createTriangleSVG(
-			answers.logoName,
-			answers.color,
-			answers.textColor
-		);
-	}
-  
+  if (answers.shape === "circle") {
+    logoSVG = shape.createCircleSVG();
+  } else if (answers.shape === "square") {
+    logoSVG = shape.createSquareSVG();
+  } else {
+    logoSVG = shape.createTriangleSVG();
+  }
+
   return logoSVG;
 }
 
